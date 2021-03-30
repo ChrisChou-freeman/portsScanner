@@ -18,7 +18,7 @@ const checkPortParms = {
   port: 0,
   host: '127.0.0.1',
   opts: {}
-}
+};
 
 function findAPortInUse (params=checkPortStatus) {
   params.status = 'open';
@@ -52,7 +52,9 @@ function checkPortStatus (params=checkPortParms) {
     socket.setTimeout(timeout)
     socket.on('timeout', function () {
       status = 'closed';
-      error = new Error('Timeout (' + timeout + 'ms) occurred waiting for ' + params.host + ':' + params.port + ' to be available');
+      error = new Error(
+      `Timeout (${timeout} ms) occurred waiting for ${params.host} : ${params.port} to be available`
+      );
       socket.destroy();
     });
 
@@ -66,7 +68,11 @@ function checkPortStatus (params=checkPortParms) {
     });
 
     socket.on('close', function (exception) {
-      if (exception && !connectionRefused) { error = error || exception } else { error = null }
+      if (exception && !connectionRefused) {
+        error = error || exception;
+      } else {
+        error = null;
+      }
       returnData.error = error;
       returnData.data = status;
       resolve(returnData);
