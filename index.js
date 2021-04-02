@@ -22,6 +22,7 @@ function isNumberLike(v=0){
 function checkPortStatus (params=checkPortParms) {
   return new Promise(resolve=>{
     const returnData = {error: null, data: null};
+    if(!params.opts) params.opts = {};
     const timeout = params.opts.timeout || 400;
     const socket = new Socket();
     let status = null;
@@ -124,4 +125,4 @@ function findAPortNotInUse (params=findPortParms) {
   return findAPortWithStatus(params);
 }
 
-export { findAPortInUse, findAPortNotInUse, checkPortStatus }
+export { findAPortInUse, findAPortNotInUse, checkPortStatus };

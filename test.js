@@ -29,3 +29,17 @@ test('findAPortNotInUse', async ()=>{
   server.close();
   server2.close();
 });
+
+test('checkPortStatusOpen', async ()=>{
+  const server = await usePort(3000);
+  const {error, data} = await checkPortStatus({port:3000});
+  if(error) throw error;
+  expect(data).toBe('open');
+  server.close();
+});
+
+test('checkPortStatusClosed', async ()=>{
+  const {error, data} = await checkPortStatus({port:3000});
+  if(error) throw error;
+  expect(data).toBe('closed');
+});
