@@ -1,11 +1,16 @@
 {
-  "name": "portsScanner",
+  "name": "asyncPortsScanner",
   "version": "1.0.0",
   "description": "ports scanner",
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChrisChou-freeman/portsScanner.git"
+  },
+  "homepage": "https://github.com/ChrisChou-freeman/portsScanner",
   "type": "module",
   "keywords": [],
   "author": "Chris",
