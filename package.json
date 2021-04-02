@@ -1,7 +1,7 @@
 {
-  "name": "asyncPortsScanner",
+  "name": "async-portsscanner",
   "version": "1.0.0",
-  "description": "ports scanner",
+  "description": "ports scanner Use ES 6 syntax",
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest"

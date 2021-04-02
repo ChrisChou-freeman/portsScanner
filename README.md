@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-npm install Asyncportscanner
+npm install async-portscanner 
 ```
 
 ## Usage
