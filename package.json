@@ -1,12 +1,12 @@
 {
   "name": "portsScanner",
   "version": "1.0.0",
-  "type": "module",
   "description": "ports scanner",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
+  "type": "module",
   "keywords": [],
   "author": "Chris",
   "license": "WTFPL",

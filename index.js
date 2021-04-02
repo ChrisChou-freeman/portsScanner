@@ -98,7 +98,7 @@ async function findAPortWithStatus (params=findPortParms) {
     }
   }else{
     for(let i=startPort;i<=endPort;i++){
-      const port = portList[i];
+      const port = i;
       const {error, data: startusOfPorts} = await checkPortStatus({port, host, opts});
       if(error){
         returnData.error = error;
@@ -114,12 +114,12 @@ async function findAPortWithStatus (params=findPortParms) {
   return returnData;
 }
 
-function findAPortInUse (params=checkPortStatus) {
+function findAPortInUse (params=findPortParms) {
   params.status = 'open';
   return findAPortWithStatus(params);
 }
 
-function findAPortNotInUse (params=checkPortStatus) {
+function findAPortNotInUse (params=findPortParms) {
   params.status = 'closed';
   return findAPortWithStatus(params);
 }
