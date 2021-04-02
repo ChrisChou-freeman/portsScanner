@@ -1,11 +1,5 @@
 import {Socket} from 'net';
 
-function isNumberLike(v=0){
-  const result = parseInt(v);
-  if(!isNaN(result)) return true;
-  return false;
-}
-
 const findPortParms = {
   startPort: 0,
   endPort: 65535,
@@ -13,21 +7,16 @@ const findPortParms = {
   portList: [],
   opts: {}
 };
-
 const checkPortParms = {
   port: 0,
   host: '127.0.0.1',
   opts: {}
 };
 
-function findAPortInUse (params=checkPortStatus) {
-  params.status = 'open';
-  return findAPortWithStatus(params);
-}
-
-function findAPortNotInUse (params=checkPortStatus) {
-  params.status = 'closed';
-  return findAPortWithStatus(params);
+function isNumberLike(v=0){
+  const result = parseInt(v);
+  if(!isNaN(result)) return true;
+  return false;
 }
 
 function checkPortStatus (params=checkPortParms) {
@@ -44,21 +33,19 @@ function checkPortStatus (params=checkPortParms) {
       return;
     }
 
-    socket.on('connect', function () {
+    socket.on('connect', ()=>{
       status = 'open';
       socket.destroy();
     });
 
     socket.setTimeout(timeout)
-    socket.on('timeout', function () {
+    socket.on('timeout', ()=>{
       status = 'closed';
-      error = new Error(
-      `Timeout (${timeout} ms) occurred waiting for ${params.host} : ${params.port} to be available`
-      );
+      error = new Error(`Timeout(${timeout} ms)occurred waiting for ${params.host} : ${params.port} to be available`);
       socket.destroy();
     });
 
-    socket.on('error', function (exception) {
+    socket.on('error', exception=>{
       if (exception.code !== 'ECONNREFUSED') {
         error = exception;
       } else {
@@ -67,7 +54,7 @@ function checkPortStatus (params=checkPortParms) {
       status = 'closed';
     });
 
-    socket.on('close', function (exception) {
+    socket.on('close', exception=>{
       if (exception && !connectionRefused) {
         error = error || exception;
       } else {
@@ -127,8 +114,14 @@ async function findAPortWithStatus (params=findPortParms) {
   return returnData;
 }
 
-export {
-  findAPortInUse,
-  findAPortNotInUse,
-  checkPortStatus
+function findAPortInUse (params=checkPortStatus) {
+  params.status = 'open';
+  return findAPortWithStatus(params);
 }
+
+function findAPortNotInUse (params=checkPortStatus) {
+  params.status = 'closed';
+  return findAPortWithStatus(params);
+}
+
+export { findAPortInUse, findAPortNotInUse, checkPortStatus }
