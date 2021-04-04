@@ -29,7 +29,7 @@ function checkPortStatus (params=checkPortParms) {
     let error = null;
     let connectionRefused = false;
     if(!isNumberLike(params.port)){
-      returnData.error = 'port is not number like';
+      returnData.error = new Error('port is not number like');
       resolve(returnData);
       return;
     }
