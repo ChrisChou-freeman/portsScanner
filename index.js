@@ -19,7 +19,7 @@ function isNumberLike(v=0){
   return false;
 }
 
-function checkPortStatus (params=checkPortParms) {
+async function checkPortStatus (params=checkPortParms) {
   return new Promise(resolve=>{
     const returnData = {error: null, data: null};
     if(!params.opts) params.opts = {};
@@ -115,14 +115,14 @@ async function findAPortWithStatus (params=findPortParms) {
   return returnData;
 }
 
-function findAPortInUse (params=findPortParms) {
+async function findAPortInUse (params=findPortParms) {
   params.status = 'open';
   return findAPortWithStatus(params);
 }
 
-function findAPortNotInUse (params=findPortParms) {
+async function findAPortNotInUse (params=findPortParms) {
   params.status = 'closed';
   return findAPortWithStatus(params);
 }
 
-export { findAPortInUse, findAPortNotInUse, checkPortStatus };
+export { findAPortInUse, findAPortNotInUse, checkPortStatus }
