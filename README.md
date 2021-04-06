@@ -1,5 +1,9 @@
 # portscanner
 
+## require
+
+need >= 14
+
 ## Install
 
 ```bash
