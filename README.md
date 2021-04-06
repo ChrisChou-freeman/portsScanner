@@ -1,5 +1,7 @@
 # portscanner
 
+Zero dependence
+
 ## require
 
 need >= 14
