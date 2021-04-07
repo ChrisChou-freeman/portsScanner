@@ -1,6 +1,6 @@
 {
   "name": "async-portsscanner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ports scanner Use ES 6 syntax",
   "main": "index.js",
   "scripts": {
