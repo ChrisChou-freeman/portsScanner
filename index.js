@@ -21,8 +21,8 @@ function isNumberLike(v=0){
 
 async function checkPortStatus (params=checkPortParms) {
   return new Promise(resolve=>{
+    params.opts = params.opts!==undefined?params.opts:checkPortParms.params;
     const returnData = {error: null, data: null};
-    if(!params.opts) params.opts = {};
     const timeout = params.opts.timeout || 400;
     const socket = new Socket();
     let status = null;
@@ -70,9 +70,13 @@ async function checkPortStatus (params=checkPortParms) {
 }
 
 async function findAPortWithStatus (params=findPortParms) {
+  params.host = params.host!==undefined?params.host:findPortParms.host;
+  params.startPort = params.startPort!==undefined?params.startPort:findPortParms.startPort;
+  params.endPort = params.endPort!==undefined?params.endPort:findPortParms.endPort;
+  params.portList = params.portList!==undefined?params.portList:findPortParms.portList;
+  params.opts = params.opts!==undefined?params.opts:findPortParms.opts;
   const returnData = {error: null, port: null};
-  const opts = params.opts  || {};
-  const host = params.host || opts.host;
+  const host = params.host || params.opts.host;
   const status = params.status;
   const portList = params.portList;
   let startPort = params.startPort;
