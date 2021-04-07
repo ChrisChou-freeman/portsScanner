@@ -5,14 +5,11 @@ const findPortParms = {
   endPort: 65535,
   host: '127.0.0.1',
   portList: [],
-  opts: {}
 };
 const checkPortParms = {
   port: 0,
   host: '127.0.0.1',
-  opts: {
-    timeout: 400
-  }
+  timeout: 400
 };
 
 function isNumberLike(v=0){
@@ -29,7 +26,7 @@ async function checkPortStatus (params=checkPortParms) {
   }
   return new Promise(resolve=>{
     const returnData = {error: null, data: null};
-    const timeout = params.opts.timeout || 400;
+    const timeout = params.timeout;
     const socket = new Socket();
     let status = null;
     let error = null;
@@ -76,14 +73,13 @@ async function checkPortStatus (params=checkPortParms) {
 }
 
 async function findAPortWithStatus (params=findPortParms) {
-  const returnData = {error: null, port: null};
   for(let key in findPortParms){
     if(params[key]===undefined){
       params[key]=findPortParms[key];
     }
   }
-  const opts = params.opts  || {};
-  const host = params.host || opts.host;
+  const returnData = {error: null, port: null};
+  const host = params.host;
   const status = params.status;
   const portList = params.portList;
   let startPort = params.startPort;
@@ -98,7 +94,7 @@ async function findAPortWithStatus (params=findPortParms) {
   if(portList.length>0){
     for(let i=0;i<portList.length;i++){
       const port = portList[i];
-      const {error, data: startusOfPorts} = await checkPortStatus({port, host, opts});
+      const {error, data: startusOfPorts} = await checkPortStatus({port, host});
       if(error){
         returnData.error = error;
         return returnData;
@@ -111,7 +107,7 @@ async function findAPortWithStatus (params=findPortParms) {
   }else{
     for(let i=startPort;i<=endPort;i++){
       const port = i;
-      const {error, data: startusOfPorts} = await checkPortStatus({port, host, opts});
+      const {error, data: startusOfPorts} = await checkPortStatus({port, host});
       if(error){
         returnData.error = error;
         return returnData;
