@@ -4,7 +4,7 @@ Zero dependence
 
 ## require
 
-need >= 14
+node >= 14
 
 ## Install
 
