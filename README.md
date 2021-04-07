@@ -17,7 +17,7 @@ npm install async-portscanner
 A brief example:
 
 ```javascript
-import {findAPortInUse, findAPortNotInUse} from './index.js';
+import {findAPortInUse, findAPortNotInUse} from 'async-portsscanner';
 
 findAPortInUse({startPort: 2999, endPort: 3002, host: '127.0.0.1'})
   .then(data=>{
