@@ -5,6 +5,7 @@ const findPortParms = {
   endPort: 65535,
   host: '127.0.0.1',
   portList: [],
+  timeout: 400
 };
 const checkPortParms = {
   port: 0,
@@ -79,11 +80,8 @@ async function findAPortWithStatus (params=findPortParms) {
     }
   }
   const returnData = {error: null, port: null};
-  const host = params.host;
-  const status = params.status;
-  const portList = params.portList;
-  let startPort = params.startPort;
-  let endPort = params.endPort;
+  const {host, status, portList, timeout} = params;
+  let {startPort, endPort} = params;
 
   if (startPort && endPort && endPort < startPort) {
     const tempStartPort = startPort;
@@ -94,7 +92,7 @@ async function findAPortWithStatus (params=findPortParms) {
   if(portList.length>0){
     for(let i=0;i<portList.length;i++){
       const port = portList[i];
-      const {error, data: startusOfPorts} = await checkPortStatus({port, host});
+      const {error, data: startusOfPorts} = await checkPortStatus({port, host, timeout});
       if(error){
         returnData.error = error;
         return returnData;
@@ -107,7 +105,7 @@ async function findAPortWithStatus (params=findPortParms) {
   }else{
     for(let i=startPort;i<=endPort;i++){
       const port = i;
-      const {error, data: startusOfPorts} = await checkPortStatus({port, host});
+      const {error, data: startusOfPorts} = await checkPortStatus({port, host, timeout});
       if(error){
         returnData.error = error;
         return returnData;
