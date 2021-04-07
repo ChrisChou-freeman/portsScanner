@@ -39,7 +39,7 @@ test('checkPortStatusOpen', async ()=>{
 });
 
 test('checkPortStatusClosed', async ()=>{
-  const {error, data} = await checkPortStatus({port:3000});
+  const {error, data} = await checkPortStatus({port:3002});
   if(error) throw error;
   expect(data).toBe('closed');
 });
