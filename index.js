@@ -10,7 +10,9 @@ const findPortParms = {
 const checkPortParms = {
   port: 0,
   host: '127.0.0.1',
-  opts: {}
+  opts: {
+    timeout: 400
+  }
 };
 
 function isNumberLike(v=0){
@@ -20,9 +22,13 @@ function isNumberLike(v=0){
 }
 
 async function checkPortStatus (params=checkPortParms) {
+  for(let key in checkPortParms){
+    if(params[key]===undefined){
+      params[key]=checkPortParms[key];
+    }
+  }
   return new Promise(resolve=>{
     const returnData = {error: null, data: null};
-    if(!params.opts) params.opts = {};
     const timeout = params.opts.timeout || 400;
     const socket = new Socket();
     let status = null;
@@ -71,6 +77,11 @@ async function checkPortStatus (params=checkPortParms) {
 
 async function findAPortWithStatus (params=findPortParms) {
   const returnData = {error: null, port: null};
+  for(let key in findPortParms){
+    if(params[key]===undefined){
+      params[key]=findPortParms[key];
+    }
+  }
   const opts = params.opts  || {};
   const host = params.host || opts.host;
   const status = params.status;
@@ -84,7 +95,7 @@ async function findAPortWithStatus (params=findPortParms) {
     endPort = tempStartPort;
   }
 
-  if(portList){
+  if(portList.length>0){
     for(let i=0;i<portList.length;i++){
       const port = portList[i];
       const {error, data: startusOfPorts} = await checkPortStatus({port, host, opts});
