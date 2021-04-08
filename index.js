@@ -19,7 +19,7 @@ function isNumberLike(v=0){
   return false;
 }
 
-async function checkPortStatus (params=checkPortParms) {
+export async function checkPortStatus (params=checkPortParms) {
   for(let key in checkPortParms){
     if(params[key]===undefined){
       params[key]=checkPortParms[key];
@@ -120,12 +120,12 @@ async function findAPortWithStatus (params=findPortParms) {
   return returnData;
 }
 
-async function findAPortInUse (params=findPortParms) {
+export async function findAPortInUse (params=findPortParms) {
   params.status = 'open';
   return findAPortWithStatus(params);
 }
 
-async function findAPortNotInUse (params=findPortParms) {
+export async function findAPortNotInUse (params=findPortParms) {
   params.status = 'closed';
   return findAPortWithStatus(params);
 }
