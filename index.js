@@ -130,4 +130,4 @@ async function findAPortNotInUse (params=findPortParms) {
   return findAPortWithStatus(params);
 }
 
-export { findAPortInUse, findAPortNotInUse, checkPortStatus }
+export default { findAPortInUse, findAPortNotInUse, checkPortStatus }
